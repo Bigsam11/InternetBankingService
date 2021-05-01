@@ -1,6 +1,7 @@
 package com.InternetBankingService.repository;
 
 import com.InternetBankingService.model.Md5Object;
+import com.InternetBankingService.model.PasswordObject;
 import com.InternetBankingService.model.VersionResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -40,6 +41,23 @@ public class InternetBankingInterface {
         md5Object.data = DatatypeConverter.printHexBinary(md5Object.hexString);
 
         return md5Object;
+    }
+
+    public PasswordObject checkPasswordStrength(String password){
+
+        String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+        PasswordObject passwordObject = new PasswordObject();
+        passwordObject.setPassword(password);
+
+        if(password.matches(pattern) == true){
+            passwordObject.isPasswordStrong = true;
+        }
+        else {
+            passwordObject.isPasswordStrong = false;
+        }
+        return passwordObject;
+
+
     }
 
 }

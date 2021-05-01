@@ -2,6 +2,7 @@ package com.InternetBankingService.controller;
 
 
 import com.InternetBankingService.model.Md5Object;
+import com.InternetBankingService.model.PasswordObject;
 import com.InternetBankingService.model.VersionResponse;
 import com.InternetBankingService.repository.InternetBankingInterface;
 import lombok.SneakyThrows;
@@ -39,6 +40,16 @@ public class InternetBankingController {
         response = internetBankingInterface.calculateMd5(md5Val);
         return new ResponseEntity(response,HttpStatus.OK);
     }
+
+
+    @RequestMapping(value = {"/bank/api/password/strong/{password}", "/bank/api/is-password-strong/{password}"}, method = RequestMethod.GET)
+    public ResponseEntity<PasswordObject> IsPasswordStrong(@PathVariable String password){
+        PasswordObject response = new PasswordObject();
+        response = internetBankingInterface.checkPasswordStrength(password);
+        return new ResponseEntity(response,HttpStatus.OK);
+    }
+
+
 
 
 
