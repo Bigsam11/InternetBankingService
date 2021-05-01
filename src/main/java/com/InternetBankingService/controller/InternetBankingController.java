@@ -1,14 +1,14 @@
 package com.InternetBankingService.controller;
 
 
-import com.InternetBankingService.model.APIResponse;
+import com.InternetBankingService.model.Md5Object;
 import com.InternetBankingService.model.VersionResponse;
 import com.InternetBankingService.repository.InternetBankingInterface;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,11 +26,22 @@ public class InternetBankingController {
 
     @PostConstruct
     @RequestMapping(value = {"/bank/api/version", "/bank/api-version"}, method = RequestMethod.GET)
-    public ResponseEntity<VersionResponse> GetAPIVersion(){
+    public ResponseEntity<VersionResponse> GetApiVersion(){
            VersionResponse response = new VersionResponse();
            response = internetBankingInterface.getVersion();
            return new ResponseEntity(response,HttpStatus.OK);
     }
+
+    @SneakyThrows
+    @RequestMapping(value = {"/bank/api/calc/MD5/{md5Val}", "/bank/api/calc/{md5Val}/MD5"}, method = RequestMethod.GET)
+    public ResponseEntity<VersionResponse> CalculateMD5(@PathVariable byte[] md5Val){
+        Md5Object response = new Md5Object();
+        response = internetBankingInterface.calculateMd5(md5Val);
+        return new ResponseEntity(response,HttpStatus.OK);
+    }
+
+
+
 
 
 

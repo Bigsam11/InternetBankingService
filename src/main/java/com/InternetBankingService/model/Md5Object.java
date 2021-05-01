@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class APIResponse {
-
-    public String currentVersion;
-    public Boolean isPasswordStrong;
+public class Md5Object {
+    public String data;
     public byte[] hexString;
-
 }

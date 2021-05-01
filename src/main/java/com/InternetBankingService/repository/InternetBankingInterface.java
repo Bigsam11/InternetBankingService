@@ -1,16 +1,15 @@
 package com.InternetBankingService.repository;
 
-import com.InternetBankingService.model.APIResponse;
+import com.InternetBankingService.model.Md5Object;
 import com.InternetBankingService.model.VersionResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
+import javax.xml.bind.DatatypeConverter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 
 @Repository
@@ -30,6 +29,17 @@ public class InternetBankingInterface {
         response.setCurrentVersion(""+response.getYear()+'.'+ response.getMonth()+'.'+response.getDay()+'.'+version);
         return response;
 
+    }
+
+    public Md5Object calculateMd5(byte[] hexString) throws NoSuchAlgorithmException {
+
+        Md5Object md5Object = new Md5Object();
+        MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+        hexString = messageDigest.digest();
+        md5Object.setHexString(hexString);
+        md5Object.data = DatatypeConverter.printHexBinary(md5Object.hexString);
+
+        return md5Object;
     }
 
 }
