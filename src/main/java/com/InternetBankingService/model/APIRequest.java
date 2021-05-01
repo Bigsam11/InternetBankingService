@@ -13,8 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class APIRequest {
 
-    @Value("$(version.number)")
-    private String versionNumber;
+
     public  String password;
     public  String hexParam;
     public Date currentDate;
