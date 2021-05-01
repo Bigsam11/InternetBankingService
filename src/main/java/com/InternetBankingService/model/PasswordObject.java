@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PasswordObject {
-    public   String password;
+    public String password;
     public boolean isPasswordStrong;
 }
