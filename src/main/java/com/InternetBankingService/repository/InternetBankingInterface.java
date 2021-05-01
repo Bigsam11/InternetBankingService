@@ -21,16 +21,27 @@ public class InternetBankingInterface {
 
     @PostConstruct
     public VersionResponse getVersion(){
-
-        LocalDate getdate = LocalDate.now();
+       /*
+       * The first thing i did was instantiate local date class,
+       * Then i passed in the value of the objects into the values of versionResponse objects respectively
+       * I returned the unification of all the versionResponse object with the operator . in between.
+       *
+       * */
+        LocalDate getDate = LocalDate.now();
         VersionResponse response = new VersionResponse();
-        response.setDay(getdate.getDayOfMonth());
-        response.setMonth(getdate.getMonthValue());
-        response.setYear(getdate.getYear());
+        response.setDay(getDate.getDayOfMonth());
+        response.setMonth(getDate.getMonthValue());
+        response.setYear(getDate.getYear());
         response.setCurrentVersion(""+response.getYear()+'.'+ response.getMonth()+'.'+response.getDay()+'.'+version);
         return response;
 
     }
+
+
+    /*
+    * I passed in an Md5 hashed value resolved from a string,
+    * and had the function below convert it into a hex string.
+    * */
 
     public Md5Object calculateMd5(byte[] hexString) throws NoSuchAlgorithmException {
 
@@ -42,6 +53,11 @@ public class InternetBankingInterface {
 
         return md5Object;
     }
+
+    /*
+    * I used a regex operation to find out if the password entered as a parameter
+    * matches with the function in the regex operation.if it does,i returned true,else i returned false.
+    * */
 
     public PasswordObject checkPasswordStrength(String password){
 
